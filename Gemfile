@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "1.9.3"
+# ruby "1.9.3"
 
 gem 'rails', '3.2.13'
 
@@ -7,9 +7,7 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
-require 'wavefile'
-require 'matrix.rb'
-
+gem 'wavefile'
 
 # Gems used only for assets and not required
 # in production environments by default.
