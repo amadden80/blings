@@ -15,9 +15,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: Bling_development
+  database: bling_development
   pool: 5
-  username: Bling
+  username: amadden80
+  host: localhost
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -41,15 +42,17 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: Bling_test
+  database: bling_development
   pool: 5
-  username: Bling
+  username: amadden80
+  host: localhost
   password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: Bling_production
+  database: bling_development
   pool: 5
-  username: Bling
+  username: amadden80
+  host: localhost
   password:
