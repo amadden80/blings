@@ -141,12 +141,4 @@ module ApplicationHelper
 
   end
 
-
-
-
-  def 
-
-
-
-
 end

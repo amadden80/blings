@@ -2,19 +2,19 @@ desc "Manage audio files"
 
 def deleteOldFile(filename, keepSeconds)
 
-    puts "****************" 
-    puts filename   
-    puts Time.now
-    puts File.ctime(filename)
-    puts keepSeconds
-    puts filename
+    puts "******* begin *******" 
+    puts "Filename: #{filename}"
+    puts "Now: #{Time.now}"
+    puts "Filen Ctime: #{File.ctime(filename)}"
+    puts "Keep: #{keepSeconds}"
+    puts "Filename: #{filename}"
 
     if (Time.now - File.ctime(filename)) > keepSeconds
       File.delete(filename)
-      puts "Delete: #{filename}"
+      puts "*Delete: #{filename}*"
     end
 
-    puts "****************" 
+    puts "******* end *******" 
 end
 
 task :manage_nonuser_audiofiles => :environment do

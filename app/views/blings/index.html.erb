@@ -1,6 +1,8 @@
-<%= form_tag('/bling') do |f| %>
 
-<%= f.label "Frequency" %>  
-<%= f.integer_field :frequency %></br>
+<%= form_tag bling_path do %>
+
+<%= number_field_tag :frequency, nil, :in => 20...20000 %></br>
+
+<%= submit_tag '~bling~'  %></br>
 
 <% end %>
