@@ -41,7 +41,7 @@ task :manage_all_audiofiles => :environment do
     deleteOldFile(filename, keepSeconds)
   end
 
-  keepSeconds = 86400
+  keepSeconds = 10
   Dir[(Rails.root.to_s << "/public/audio/test_audio/*")].each do |filename|
     deleteOldFile(filename, keepSeconds)
   end
