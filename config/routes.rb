@@ -7,4 +7,6 @@ Bling::Application.routes.draw do
   match '/test/slide/:startFreq/:endFreq' => 'welcome#slideTone'
   match '/test/3rd/:startFreq/:endFreq' => 'welcome#slide3rd'
 
+  match '/bling' => 'blings#bling'
+
 end

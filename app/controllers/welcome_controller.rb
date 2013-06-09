@@ -59,7 +59,6 @@ class WelcomeController < ApplicationController
 
 
   def testTone
-
     s = Synth.new({path: $absolute_path_test_audio, frequency: params[:frequency].to_f, filename: 'test_tone',  seconds: 1})
     s.makeTone
     s.applyFades(100)
@@ -70,7 +69,6 @@ class WelcomeController < ApplicationController
   end
 
   def slideTone
-
     s = Synth.new({path: $absolute_path_test_audio, filename: 'test_slideTone',  seconds: 1})
     s.makeSlideTone(params[:startFreq].to_f, params[:endFreq].to_f)
     s.applyFades(100)
@@ -81,7 +79,6 @@ class WelcomeController < ApplicationController
   end
 
   def slide3rd
-
     s = Synth.new({path: $absolute_path_test_audio, filename: 'test_slide3rd', seconds: 1})
     s.makeSlide3rd(params[:startFreq].to_f, params[:endFreq].to_f)
     s.applyFades(100)

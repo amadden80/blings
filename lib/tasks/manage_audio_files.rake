@@ -1,10 +1,20 @@
 desc "Manage audio files"
 
 def deleteOldFile(filename, keepSeconds)
+
+    puts "****************" 
+    puts filename   
+    puts Time.now
+    puts File.ctime(filename)
+    puts keepSeconds
+    puts filename
+
     if (Time.now - File.ctime(filename)) > keepSeconds
       File.delete(filename)
       puts "Delete: #{filename}"
     end
+
+    puts "****************" 
 end
 
 task :manage_nonuser_audiofiles => :environment do
@@ -44,7 +54,6 @@ task :manage_all_audiofiles => :environment do
 
   keepSeconds = 10
   Dir[("public/audio/test_audio/*")].each do |filename|
-    puts filename
     deleteOldFile(filename, keepSeconds)
   end
 
