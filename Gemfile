@@ -8,6 +8,7 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 gem 'wavefile'
+gem 'jquery-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -21,6 +22,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
 
-
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'pry-stack_explorer'
+  gem 'better_errors'
+  gem 'quiet_assets'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+  gem 'annotate'
+end

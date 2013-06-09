@@ -29,20 +29,21 @@ task :manage_user_audiofiles => :environment do
   end
 end
 
+
 task :manage_all_audiofiles => :environment do
 
   keepSeconds = 7200
-  Dir[(Rails.root.to_s << "/public/audio/non_user_audio/*")].each do |filename| 
+  Dir[("/audio/non_user_audio/*")].each do |filename| 
     deleteOldFile(filename, keepSeconds)
   end
   
   keepSeconds = 172800
-  Dir[(Rails.root.to_s << "/public/audio/user_audio/*")].each do |filename| 
+  Dir[("/audio/user_audio/*")].each do |filename| 
     deleteOldFile(filename, keepSeconds)
   end
 
   keepSeconds = 10
-  Dir[(Rails.root.to_s << "/public/audio/test_audio/*")].each do |filename|
+  Dir[("/public/audio/test_audio/*")].each do |filename|
     deleteOldFile(filename, keepSeconds)
   end
 

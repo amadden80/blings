@@ -3,12 +3,12 @@
 <h1>Blings Synth Test:</h1>    
 
 
-<% @paths.each do |path| %>
+<% @filepaths.each do |curpath| %>
 
-<h3><%= path %></h3>
+<h3><%= curpath %></h3>
 <audio controls>
-  <source src="<%= path %>">
-  <embed height="50" width="100" src="<%= path %>">
+  <source src="<%= curpath %>">
+  <embed height="50" width="100" src="<%= curpath %>">
     Your browser does not support this audio format.
 </audio>
 

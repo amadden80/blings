@@ -1,6 +1,6 @@
 Bling::Application.routes.draw do
 
-  root :to => 'welcome#index'
+  root :to => 'blings#index'
 
   match 'test' => 'welcome#test'
   match '/test/tone/:frequency' => 'welcome#testTone'

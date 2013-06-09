@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  ticker: MyString
+  num_called: 1
+
+two:
+  ticker: MyString
+  num_called: 1
