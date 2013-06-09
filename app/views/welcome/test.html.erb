@@ -1,2 +1,17 @@
-<h1>Blings created a <%= @frequency %> tone.</h1>
-<a href = "<%= @path %>">Click Here</a>
+
+
+<h1>Blings Synth Test:</h1>    
+
+
+<% @paths.each do |path| %>
+
+<h3><%= path %></h3>
+<audio controls>
+  <source src="<%= path %>">
+  <embed height="50" width="100" src="<%= path %>">
+    Your browser does not support this audio format.
+</audio>
+
+<% end %>
+
+
