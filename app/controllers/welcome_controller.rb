@@ -78,12 +78,12 @@ class WelcomeController < ApplicationController
       filename = @filename.gsub('.wav', '')
 
       format = Format.new(:mono, :pcm_16, @fs)
-      writer = Writer.new(Rails.root.to_s << "/public/#{filename}.wav", format)
+      writer = Writer.new(Rails.root.to_s << "/public/audio/test_audio/#{filename}.wav", format)
       buffer = Buffer.new(@tone, Format.new(:mono, :float, @fs))
       writer.write(buffer)
       writer.close()
 
-      return "/#{filename}.wav"
+      return "audio/test_audio/#{filename}.wav"
 
     end
 
