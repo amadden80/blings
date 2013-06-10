@@ -42,20 +42,27 @@ end
 
 task :manage_all_audiofiles => :environment do
 
-  keepSeconds = 7200
-  Dir[("audio/non_user_audio/*")].each do |filename| 
-    deleteOldFile(filename, keepSeconds)
-  end
+  # keepSeconds = 7200
+  # Dir[("audio/non_user_audio/*")].each do |filename| 
+  #   deleteOldFile(filename, keepSeconds)
+  # end
   
-  keepSeconds = 172800
-  Dir[("audio/user_audio/*")].each do |filename| 
-    deleteOldFile(filename, keepSeconds)
-  end
+  # keepSeconds = 172800
+  # Dir[("audio/user_audio/*")].each do |filename| 
+  #   deleteOldFile(filename, keepSeconds)
+  # end
 
   keepSeconds = 10
+  puts "****START****"
+  puts "****START****"
+  puts "****START****"
   Dir[("/public/audio/test_audio/*")].each do |filename|
+    puts filename
     deleteOldFile(filename, keepSeconds)
   end
+  puts "****END****"
+  puts "****END****"
+  puts "****END****"
 
 end
 

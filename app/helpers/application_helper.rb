@@ -151,15 +151,13 @@ module ApplicationHelper
 
 
 
+
+# You will need to manage this for other than non_user_content
+
   def manageAudioFiles(maxNumFiles)
 
     fileNumber = Dir[(Rails.root.to_s << "/public/audio/non_user_audio/*")].count
-    puts fileNumber
-    puts fileNumber
-    puts fileNumber
-    puts fileNumber
-    puts fileNumber
-    keepSeconds = 5000
+    keepSeconds = 7200
 
     while fileNumber > maxNumFiles
       keepSeconds *= 0.5
@@ -170,7 +168,6 @@ module ApplicationHelper
     end
 
   end
-  
 
 
 end
