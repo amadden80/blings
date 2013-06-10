@@ -142,12 +142,23 @@ module ApplicationHelper
   end
 
 
-  def deleteOldFile(filename, keepSeconds)
-    if (Time.now - File.ctime(filename)) > keepSeconds
+def deleteOldFile(filename, keepSeconds)
+
+    puts "******* begin *******" 
+    puts "Filename: #{filename}"
+    puts "Now: #{Time.now}"
+    puts "Ctime: #{File.stat(filename).ctime}"
+    puts "Differ: #{Time.now - File.stat(filename).ctime}"
+    puts "Keep: #{keepSeconds}"
+    puts "Filename: #{filename}"
+
+    if (Time.now - File.stat(filename).ctime) > keepSeconds
       File.delete(filename)
-      puts "****Delete: #{filename}********"
+      puts "*/*/*/* Delete: #{filename} */*/*/*"
     end
-  end
+
+    puts "******* end *******" 
+end
 
 
 
@@ -156,18 +167,17 @@ module ApplicationHelper
 
   def manageAudioFiles(maxNumFiles)
 
-    fileNumber = Dir[(Rails.root.to_s << "/public/audio/non_user_audio/*")].count
+    fileNumber = Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].count
     keepSeconds = 7200
 
     while fileNumber > maxNumFiles
       keepSeconds *= 0.5
-      Dir[(Rails.root.to_s << "/public/audio/non_user_audio/*")].each do |filename| 
+      Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].each do |filename| 
       deleteOldFile(filename, keepSeconds)
       end
-      fileNumber = Dir[(Rails.root.to_s << "/public/audio/non_user_audio/*")].count
+      fileNumber = Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].count
     end
 
   end
-
 
 end
