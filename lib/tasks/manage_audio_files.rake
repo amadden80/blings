@@ -53,23 +53,13 @@ task :manage_all_audiofiles => :environment do
   # end
 
   keepSeconds = 10
-  puts "****START****"
-  puts 1
-  puts Dir[Rails.root.to_s + "/audio/test_audio/*"]
-  puts 2
-  puts Dir[Rails.root.to_s + "public/audio/test_audio/*"]
-  puts 3
-  puts Dir[Rails.root.to_s + "/public/audio/test_audio/*"]
-  puts 4
-  puts Dir[Rails.root.to_s + "audio/test_audio/*"]
 
   puts "****START****"
   puts "****START****"
-  Dir[("/audio/test_audio/*")].each do |filename|
+  Dir[("/public/audio/test_audio/*")].each do |filename|
     puts filename
     deleteOldFile(filename, keepSeconds)
   end
-  puts "****END****"
   puts "****END****"
   puts "****END****"
 
