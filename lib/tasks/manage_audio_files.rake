@@ -5,63 +5,61 @@ def deleteOldFile(filename, keepSeconds)
     puts "******* begin *******" 
     puts "Filename: #{filename}"
     puts "Now: #{Time.now}"
-    puts "Filen Ctime: #{File.ctime(filename)}"
+    puts "Ctime: #{File.stat(filename).ctime}"
+    puts "Differ: #{Time.now - File.stat(filename).ctime}"
     puts "Keep: #{keepSeconds}"
     puts "Filename: #{filename}"
 
-    if (Time.now - File.ctime(filename)) > keepSeconds
+    if (Time.now - File.stat(filename).ctime) > keepSeconds
       File.delete(filename)
-      puts "*Delete: #{filename}*"
+      puts "*/*/*/* Delete: #{filename} */*/*/*"
     end
 
     puts "******* end *******" 
 end
 
-task :manage_nonuser_audiofiles => :environment do
-  keepSeconds = 1000
-  Dir[(Rails.root.to_s << "/public/audio/non_user_audio/*")].each do |filename| 
-    deleteOldFile(filename, keepSeconds)
-  end
-end
+# task :manage_nonuser_audiofiles => :environment do
+#   keepSeconds = 1000
+#   Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].each do |filename| 
+#     deleteOldFile(filename, keepSeconds)
+#   end
+# end
 
-task :manage_test_audiofiles => :environment do
-  keepSeconds = 10000
+# task :manage_test_audiofiles => :environment do
+#   keepSeconds = 10000
 
-  Dir[(Rails.root.to_s << "/public/audio/test_audio/*")].each do |filename|
-    deleteOldFile(filename, keepSeconds)
-  end
-end
+#   Dir[(Rails.root.to_s + "/public/audio/test_audio/*")].each do |filename|
+#     deleteOldFile(filename, keepSeconds)
+#   end
+# end
 
-task :manage_user_audiofiles => :environment do
-  keepSeconds = 5000
-  Dir[(Rails.root.to_s << "/public/audio/user_audio/*")].each do |filename| 
-    deleteOldFile(filename, keepSeconds)
-  end
-end
+# task :manage_user_audiofiles => :environment do
+#   keepSeconds = 5000
+#   Dir[(Rails.root.to_s + "/public/audio/user_audio/*")].each do |filename| 
+#     deleteOldFile(filename, keepSeconds)
+#   end
+# end
 
 
 task :manage_all_audiofiles => :environment do
-
-  # keepSeconds = 7200
-  # Dir[("audio/non_user_audio/*")].each do |filename| 
-  #   deleteOldFile(filename, keepSeconds)
-  # end
   
-  # keepSeconds = 172800
-  # Dir[("audio/user_audio/*")].each do |filename| 
-  #   deleteOldFile(filename, keepSeconds)
-  # end
+  keepSeconds = 3600 # 1 hour
+  Dir[Rails.root.to_s + "/public/audio/non_user_audio/*"].each do |filename|
+    puts filename
+    deleteOldFile(filename, keepSeconds)
+  end
 
-  keepSeconds = 10
-  puts "****START****"
-  puts "****START****"
+  keepSeconds = 86400 # 1 day
+  Dir[Rails.root.to_s + "/public/audio/user_audio/*"].each do |filename|
+    puts filename
+    deleteOldFile(filename, keepSeconds)
+  end
+
+  keepSeconds = 1800 # 30 minutes
   Dir[Rails.root.to_s + "/public/audio/test_audio/*"].each do |filename|
     puts filename
     deleteOldFile(filename, keepSeconds)
   end
-  puts "****END****"
-  puts "****END****"
-  puts "****END****"
 
 end
 
