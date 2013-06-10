@@ -56,7 +56,7 @@ task :manage_all_audiofiles => :environment do
   puts "****START****"
   puts "****START****"
   puts "****START****"
-  Dir[("/public/audio/test_audio/*")].each do |filename|
+  Dir[("/audio/test_audio/*")].each do |filename|
     puts filename
     deleteOldFile(filename, keepSeconds)
   end
