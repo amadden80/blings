@@ -9,6 +9,7 @@ gem 'rails', '3.2.13'
 gem 'pg'
 gem 'wavefile'
 gem 'jquery-rails'
+gem 'newrelic_rpm'
 
 # Gems used only for assets and not required
 # in production environments by default.
