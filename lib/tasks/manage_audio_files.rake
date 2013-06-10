@@ -53,7 +53,7 @@ task :manage_all_audiofiles => :environment do
   end
 
   keepSeconds = 10
-  Dir[("public/audio/test_audio/*")].each do |filename|
+  Dir[("/public/audio/test_audio/*")].each do |filename|
     deleteOldFile(filename, keepSeconds)
   end
 
