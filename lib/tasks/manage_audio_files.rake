@@ -54,7 +54,15 @@ task :manage_all_audiofiles => :environment do
 
   keepSeconds = 10
   puts "****START****"
-  puts Rails.root.to_s
+  puts 1
+  puts Dir[Rails.root.to_s + "/audio/test_audio/*"]
+  puts 2
+  puts Dir[Rails.root.to_s + "public/audio/test_audio/*"]
+  puts 3
+  puts Dir[Rails.root.to_s + "/public/audio/test_audio/*"]
+  puts 4
+  puts Dir[Rails.root.to_s + "audio/test_audio/*"]
+
   puts "****START****"
   puts "****START****"
   Dir[("/audio/test_audio/*")].each do |filename|
