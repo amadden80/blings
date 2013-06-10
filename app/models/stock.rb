@@ -1,10 +1,7 @@
 class Stock < ActiveRecord::Base
-  attr_accessible :num_called, :ticker
-  after_initialize :default_values
+  attr_accessible :name, :ticker
 
-  private
-    def default_values
-      self.num_called ||= 0
-    end
+  has_many :portfolios
+  has_many :users, :through => :portfolios
+
 end
-

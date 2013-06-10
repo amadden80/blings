@@ -130,9 +130,9 @@ module ApplicationHelper
       phase1 = cumsum(freqVector1.map{|sample| sample/@fs * @twoPI})
       phase2 = cumsum(freqVector2.map{|sample| sample/@fs * @twoPI})
       phase3 = cumsum(freqVector3.map{|sample| sample/@fs * @twoPI})
-      tone1 = phase1.map{|sample|  (@amplitude * Math.sin(sample)).to_f}
-      tone2 = phase2.map{|sample|  (@amplitude * Math.sin(sample)).to_f}
-      tone3 = phase3.map{|sample|  (@amplitude * Math.sin(sample)).to_f}
+      tone1 = phase1.map{|sample| (@amplitude * Math.sin(sample)).to_f}
+      tone2 = phase2.map{|sample| (@amplitude * Math.sin(sample)).to_f}
+      tone3 = phase3.map{|sample| (0.9*@amplitude * Math.sin(sample)).to_f}
       @tone = []
       tone1.each_with_index{ |sample, index| @tone << (sample + tone2[index] + tone3[index])}
       
@@ -142,28 +142,28 @@ module ApplicationHelper
   end
 
 
-def deleteOldFile(filename, keepSeconds)
+  def deleteOldFile(filename, keepSeconds)
 
-    puts "******* begin *******" 
-    puts "Filename: #{filename}"
-    puts "Now: #{Time.now}"
-    puts "Ctime: #{File.stat(filename).ctime}"
-    puts "Differ: #{Time.now - File.stat(filename).ctime}"
-    puts "Keep: #{keepSeconds}"
-    puts "Filename: #{filename}"
+      puts "******* begin *******" 
+      puts "Filename: #{filename}"
+      puts "Now: #{Time.now}"
+      puts "Ctime: #{File.stat(filename).ctime}"
+      puts "Differ: #{Time.now - File.stat(filename).ctime}"
+      puts "Keep: #{keepSeconds}"
+      puts "Filename: #{filename}"
 
-    if (Time.now - File.stat(filename).ctime) > keepSeconds
-      File.delete(filename)
-      puts "*/*/*/* Delete: #{filename} */*/*/*"
-    end
+      if (Time.now - File.stat(filename).ctime) > keepSeconds
+        File.delete(filename)
+        puts "*/*/*/* Delete: #{filename} */*/*/*"
+      end
 
-    puts "******* end *******" 
-end
-
-
+      puts "******* end *******" 
+  end
 
 
-# You will need to manage this for other than non_user_content
+
+
+  # You will need to manage this for other than non_user_content
 
   def manageAudioFiles(maxNumFiles)
 
@@ -180,4 +180,19 @@ end
 
   end
 
+
+
+  def getStockPrices(ticker)
+    unless ticker.nil?
+      ticker = ticker.chomp.upcase.split(' ').first
+      stockResponse = YahooFinance::get_quotes(YahooFinance::StandardQuote, ticker)[ticker]
+      puts stockResponse
+      close = stockResponse.previousClose
+      open = stockResponse.lastTrade
+      compName = stockResponse.name
+      return open, close
+    end
+  end
+
 end
+

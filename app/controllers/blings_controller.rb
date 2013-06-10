@@ -6,8 +6,23 @@ class BlingsController < ApplicationController
   end
 
   def bling
-    s = Synth.new({path: $absolute_path_non_user_audio, frequency: params[:frequency].to_f, filename: "tone-#{params[:frequency]}",  seconds: 1})
-    s.makeTone
+
+    close, open = getStockPrices(params[:ticker])
+
+    puts "*****"
+    puts params[:ticker]
+    puts open
+    puts close
+    puts "*****"
+
+    maxNum = [open, close].max
+
+    open = (open/maxNum)*440 + 100
+    close = (close/maxNum)*440 + 100
+
+    s = Synth.new({path: $absolute_path_test_audio, filename: "tone-#{params[:ticker]}",  seconds: 0.25})
+    s.makeSlide3rd(open.to_f, close.to_f)
+    s.normalize
     s.applyFades(100)
     absolutePath = s.writeWave
 
