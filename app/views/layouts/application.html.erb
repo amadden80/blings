@@ -8,7 +8,12 @@
 </head>
 <body>
 
+<% if current_user %>
+  <%= link_to 'logout', logout_path, method: :delete %><br/>
+<% end %>
+
 <%= yield %>
+
 
 </body>
 </html>

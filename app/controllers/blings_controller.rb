@@ -7,7 +7,10 @@ class BlingsController < ApplicationController
 
   def bling
 
+    puts getStockPriceArray(params[:ticker], 60, 1)
+
     close, open = getStockPrices(params[:ticker])
+
 
     puts "*****"
     puts params[:ticker]
@@ -20,7 +23,7 @@ class BlingsController < ApplicationController
     open = (open/maxNum)*440 + 100
     close = (close/maxNum)*440 + 100
 
-    s = Synth.new({path: $absolute_path_test_audio, filename: "tone-#{params[:ticker]}",  seconds: 0.25})
+    s = Synth.new({path: $absolute_path_test_audio, filename: "tone-#{params[:ticker]}",  seconds:0.5})
     s.makeSlide3rd(open.to_f, close.to_f)
     s.normalize
     s.applyFades(100)
@@ -31,5 +34,6 @@ class BlingsController < ApplicationController
     path = absolutePath.gsub($absolute_prepath, "/")
     redirect_to path
   end
+
 
 end

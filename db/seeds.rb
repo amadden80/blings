@@ -23,10 +23,9 @@ stockTickers = [
   'MSFT',
   'PFE' ]
 
-
 # Insert into Database new objects!
-user_array = userNames.map {|name| User.create(name: name)}
-portfolio_array = portfolioNames.map {|name| Portfolio.create(name: name)}
+user_array = userNames.map {|name| User.create(name: name, password: 'password123')}
+portfolio_array = portfolioNames.map {|name| Portfolio.create(name: name,)}
 stock_array = stockTickers.map {|ticker| Stock.create(ticker: ticker)}
 
 

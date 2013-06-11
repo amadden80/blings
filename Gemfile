@@ -11,6 +11,13 @@ gem 'wavefile'
 gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'yahoofinance'
+# gem 'nokogiri'
+
+gem 'bcrypt-ruby'
+gem 'haml'
+
+# gem 'json'
+gem 'httparty'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -1,5 +1,5 @@
-module ApplicationHelper
 
+module ApplicationHelper
 
   $absolute_prepath = Rails.root.to_s << "/public/"
   $absolute_path_non_user_audio = Rails.root.to_s << "/public/audio/non_user_audio/"
@@ -193,6 +193,25 @@ module ApplicationHelper
       return open, close
     end
   end
+
+
+
+  # def getStockPriceArray(ticker, secondIntervals, days)
+
+  #   url = "https://www.google.com/finance/getprices?q=#{ticker}&i=#{secondIntervals}&p=#{days}d&f=d,o,h,l,c,v"
+  #   response = HTTParty.get(url)
+  #   response.each do |row|
+  #     puts row
+  #   end
+    
+  # end
+
+
+  # require 'digest/md5'
+  # def gravatarImageHandler(email) 
+  #   hash = Digest::MD5.hexdigest(email.downcase)
+  #   return "www.gravatar.com/avatar/#{hash}?default=blank"
+  # end
 
 end
 
