@@ -213,5 +213,25 @@ module ApplicationHelper
   #   return "www.gravatar.com/avatar/#{hash}?default=blank"
   # end
 
+
+  def getDetaulStockAudioPath(ticker)    
+
+    close, open = getStockPrices(ticker)
+    maxNum = [open, close].max
+    open = ((open/maxNum)**3)*440 + 100
+    close = ((close/maxNum)**3)*440 + 100
+    s = Synth.new({path: $absolute_path_non_user_audio, filename: "tone-#{ticker}",  seconds:1.5})
+    s.makeSlide3rd(open.to_f, close.to_f)
+    s.normalize
+    s.applyFades(100)
+    absolutePath = s.writeWave
+
+    manageAudioFiles(100)
+
+    path = absolutePath.gsub($absolute_prepath, "/")
+    return path
+  end
+
+
 end
 

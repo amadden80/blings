@@ -14,6 +14,6 @@ Bling::Application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :users, only: [:new, :create, :index]
-  resources :portfolios, only: [:index]
+  resources :portfolios
 
 end

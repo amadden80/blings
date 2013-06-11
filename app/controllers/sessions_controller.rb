@@ -1,9 +1,14 @@
 class SessionsController < ApplicationController
   
+
   def new
+    if session[:user_id]
+      redirect_to portfolios_path
+    end
   end
 
   def create
+
     user = User.find_by_email(params[:email])
     if user.present?
       puts 'located_user: ' + user.username
@@ -11,7 +16,7 @@ class SessionsController < ApplicationController
       if authenticated_user
         session[:user_id] = authenticated_user.id
         puts session
-        render text: 'You are authenticated', layout: true
+        redirect_to portfolios_path
       else
         redirect_to sessions_new_path
       end

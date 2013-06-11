@@ -1,3 +1,13 @@
 %h1
   This is a portfolio for 
   = @user.username
+  = link_to 'New Stock', new_portfolio_path
+- @portfolioPackage.each do |portfolio|
+  %ul
+    %li
+      - portfolio.each do |stock|
+        = stock[:ticker]
+        %audio{:controls => ""}
+          %source{:src => "#{stock[:path]}"}
+          %embed{:height => "50", :src => "#{stock[:path]}", :width => "100"}
+          Your browser does not support this audio format.

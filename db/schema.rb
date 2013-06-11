@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20130610210620) do
 
   create_table "portfolios_stocks", :id => false, :force => true do |t|
     t.integer "stock_id"
-    t.integer "porfolio_id"
+    t.integer "portfolio_id"
   end
 
   create_table "stocks", :force => true do |t|

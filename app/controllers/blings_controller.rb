@@ -7,10 +7,7 @@ class BlingsController < ApplicationController
 
   def bling
 
-    puts getStockPriceArray(params[:ticker], 60, 1)
-
     close, open = getStockPrices(params[:ticker])
-
 
     puts "*****"
     puts params[:ticker]

@@ -9,7 +9,9 @@
 <body>
 
 <% if current_user %>
-  <%= link_to 'logout', logout_path, method: :delete %><br/>
+  <%= link_to 'Log-Out', logout_path, method: :delete %><br/>
+<% else %>
+  <%= link_to 'New-User', new_user_path %><br/>
 <% end %>
 
 <%= yield %>
