@@ -18,19 +18,20 @@
     color: #000000;
     font-size: 40px;
     margin-top: 250px;
-    margin-left: 30%;
+    margin-left: 325%;
 }
 
 #lower_mpt {
     font-family: courier;
     color: #F28F16;
     font-size: 20px;
-    margin-left: 42%;
+    margin-left: 37%;
 }
 
 #main_search {
-    margin-left: 44%
+    margin-left: 39%
 }
+
 
 #login_forum {
     font-family: courier;

@@ -125,7 +125,6 @@ module ApplicationHelper
 
       freqVector3 = freqVector1.map{|sample| (sample * 1.5)}
 
-
       phase1 = cumsum(freqVector1.map{|sample| sample/@fs * @twoPI})
       phase2 = cumsum(freqVector2.map{|sample| sample/@fs * @twoPI})
       phase3 = cumsum(freqVector3.map{|sample| sample/@fs * @twoPI})

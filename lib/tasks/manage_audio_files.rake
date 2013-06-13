@@ -1,5 +1,7 @@
 desc "Manage audio files"
 
+require 'FileUtils'
+
 def deleteOldFile(filename, keepSeconds)
 
     puts "******* begin *******" 
@@ -7,7 +9,7 @@ def deleteOldFile(filename, keepSeconds)
     puts "Now: #{Time.now} -- Ctime: #{File.stat(filename).ctime}"
 
     if (Time.now - File.stat(filename).ctime) > keepSeconds
-      File.delete(filename)
+      FileUtils.rm_rf(filename, secure: true)
       puts "*/*/*/* Delete: #{filename} */*/*/*"
     end
 
@@ -39,12 +41,12 @@ end
 
 task :manage_all_audiofiles => :environment do
   
-  keepSeconds = 3600 # 1 hour
+  keepSeconds = 1800 # 1 hour
   Dir[Rails.root.to_s + "/public/audio/non_user_audio/*"].each do |filename|
     deleteOldFile(filename, keepSeconds)
   end
 
-  keepSeconds = 86400 # 1 day
+  keepSeconds = 1800 # 1 day
   Dir[Rails.root.to_s + "/public/audio/user_audio/*"].each do |filename|
     deleteOldFile(filename, keepSeconds)
   end
@@ -58,21 +60,10 @@ end
 
 
 task :clear_all_audiofiles => :environment do
-  
-  Dir[Rails.root.to_s + "/public/audio/non_user_audio/*"].each do |filename|
-    File.delete(filename)
-    puts "*/*/*/* Delete: #{filename} */*/*/*"
-  end
 
-  Dir[Rails.root.to_s + "/public/audio/user_audio/*"].each do |filename|
-    File.delete(filename)
-    puts "*/*/*/* Delete: #{filename} */*/*/*"
-  end
-
-  Dir[Rails.root.to_s + "/public/audio/test_audio/*"].each do |filename|
-    File.delete(filename)
-    puts "*/*/*/* Delete: #{filename} */*/*/*"
-  end
+  FileUtils.rm_rf((Rails.root.to_s + "/public/audio/non_user_audio/."), secure: true)
+  FileUtils.rm_rf((Rails.root.to_s + "/public/audio/user_audio/."), secure: true)
+  FileUtils.rm_rf((Rails.root.to_s + "/public/audio/test_audio/."), secure: true)
 
 end
 
