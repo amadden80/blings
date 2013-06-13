@@ -1,6 +1,6 @@
 desc "Manage audio files"
 
-require 'FileUtils'
+
 
 def deleteOldFile(filename, keepSeconds)
 
