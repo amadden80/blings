@@ -2,16 +2,18 @@ class PortfoliosController < ApplicationController
 
   before_filter :require_login
   
+  private
+
   def require_login
-    if session[:user_id]
+    if current_user
       @user = User.find(session[:user_id])
-      
     else
       redirect_to sessions_new_path
     end
   end
 
-  
+
+  public
 
   include ApplicationHelper
 

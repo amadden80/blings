@@ -1,18 +1,18 @@
 <!--Main page text and search-->
 <div class="container" id="upper_mpt">
   <p>
-    Ever heard of Sonification?
+    That was <%=@companyName%> Sonified!
   </p>
 </div>
 
-<div class="container" id="lower_mpt">
+<div id="lower_mpt">
   <p>
-    Enter a stock quote and check it out!
+    Enter a stock quote and to hear another!
   </p>
 </div>
 <!--/ Main page text and search-->
 
-<div class="container" id="main_search">
+<div id="main_search">
    <%= form_tag bling_path, class: 'form-search' do %>
       <div class="input-append">
        <%= text_field_tag :ticker, nil, class: 'span4 search-query' %>
@@ -21,5 +21,8 @@
    <% end %>
 </div>
 
-
-
+<% if @path %>
+  <span>
+    <embed width="0" height="0" src = "<%=@path%>">
+  <span>
+<% end %>

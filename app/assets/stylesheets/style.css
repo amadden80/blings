@@ -1,0 +1,42 @@
+#nav {
+    font-family: Courier;
+    color: #000000;
+}
+
+#login {
+    font-family: Courier;
+    color: #000000;
+}
+
+#signup {
+    font-family: Courier;
+    color: #000000;
+}
+
+#upper_mpt {
+    font-family: Courier;
+    color: #000000;
+    font-size: 40px;
+    margin-top: 250px;
+    margin-left: 42%;
+}
+
+#lower_mpt {
+    font-family: courier;
+    color: #F28F16;
+    font-size: 20px;
+}
+
+#main_search {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login_forum {
+    font-family: courier;
+}
+
+
+#login_forum_main {
+    margin-left: 0px;
+}

@@ -6,7 +6,6 @@ module ApplicationHelper
   $absolute_path_user_audio = Rails.root.to_s << "/public/audio/user_audio/"
   $absolute_path_test_audio = Rails.root.to_s << "/public/audio/test_audio/"
 
-
   class Synth
 
     include WaveFile
@@ -143,28 +142,18 @@ module ApplicationHelper
 
 
   def deleteOldFile(filename, keepSeconds)
-
-      puts "******* begin *******" 
+      
       puts "Filename: #{filename}"
       puts "Now: #{Time.now}"
-      puts "Ctime: #{File.stat(filename).ctime}"
-      puts "Differ: #{Time.now - File.stat(filename).ctime}"
-      puts "Keep: #{keepSeconds}"
-      puts "Filename: #{filename}"
-
+      
       if (Time.now - File.stat(filename).ctime) > keepSeconds
         File.delete(filename)
         puts "*/*/*/* Delete: #{filename} */*/*/*"
       end
-
-      puts "******* end *******" 
   end
 
 
-
-
   # You will need to manage this for other than non_user_content
-
   def manageAudioFiles(maxNumFiles)
 
     fileNumber = Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].count
@@ -186,49 +175,42 @@ module ApplicationHelper
     unless ticker.nil?
       ticker = ticker.chomp.upcase.split(' ').first
       stockResponse = YahooFinance::get_quotes(YahooFinance::StandardQuote, ticker)[ticker]
-      puts stockResponse
-      close = stockResponse.previousClose
-      open = stockResponse.lastTrade
-      compName = stockResponse.name
-      return open, close
+        if stockResponse.nil?
+          return false
+        else
+          close = stockResponse.previousClose
+          open = stockResponse.lastTrade
+          companyName = stockResponse.name
+          return open, close, companyName
+        end
+      else
+        return false
     end
+
   end
-
-
-
-  # def getStockPriceArray(ticker, secondIntervals, days)
-
-  #   url = "https://www.google.com/finance/getprices?q=#{ticker}&i=#{secondIntervals}&p=#{days}d&f=d,o,h,l,c,v"
-  #   response = HTTParty.get(url)
-  #   response.each do |row|
-  #     puts row
-  #   end
-    
-  # end
-
-
-  # require 'digest/md5'
-  # def gravatarImageHandler(email) 
-  #   hash = Digest::MD5.hexdigest(email.downcase)
-  #   return "www.gravatar.com/avatar/#{hash}?default=blank"
-  # end
 
 
   def getDetaulStockAudioPath(ticker)    
 
     close, open = getStockPrices(ticker)
-    maxNum = [open, close].max
-    open = ((open/maxNum)**3)*440 + 100
-    close = ((close/maxNum)**3)*440 + 100
-    s = Synth.new({path: $absolute_path_non_user_audio, filename: "tone-#{ticker}",  seconds:1.5})
-    s.makeSlide3rd(open.to_f, close.to_f)
-    s.normalize
-    s.applyFades(100)
-    absolutePath = s.writeWave
+    
+    if !close.nil? && !close.nil?
+      maxNum = [open, close].max
+      open = ((open/maxNum)**3)*440 + 100
+      close = ((close/maxNum)**3)*440 + 100
+      s = Synth.new({path: $absolute_path_non_user_audio, filename: "tone-#{ticker}",  seconds:1.5})
+      s.makeSlide3rd(open.to_f, close.to_f)
+      s.normalize
+      s.applyFades(100)
+      absolutePath = s.writeWave
 
-    manageAudioFiles(100)
+      manageAudioFiles(100)
 
-    path = absolutePath.gsub($absolute_prepath, "/")
+      path = absolutePath.gsub($absolute_prepath, "/")
+    else
+      path = ''
+    end
+
     return path
   end
 

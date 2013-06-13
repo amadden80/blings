@@ -8,12 +8,13 @@ Bling::Application.routes.draw do
   match '/test/3rd/:startFreq/:endFreq' => 'welcome#slide3rd'
 
   match '/bling' => 'blings#bling'
+  match '/bling/:ticker' => 'blings#bling'
 
   get 'sessions/new' => 'sessions#new'
   post 'sessions' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :users, only: [:new, :create, :index]
+  resources :users, only: [:new, :create, :index, :destroy]
   resources :portfolios
 
 end

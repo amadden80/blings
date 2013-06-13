@@ -8,14 +8,33 @@
 </head>
 <body>
 
-<% if current_user %>
-  <%= link_to 'Log-Out', logout_path, method: :delete %><br/>
-<% else %>
-  <%= link_to 'New-User', new_user_path %><br/>
-<% end %>
+<!-- <nav class="navbar" >
+   <nav class="navbar-inner">
+     <nav class="container">
+       <ul class="nav">
+         <a class="brand" href="/" id="nav">Blings</a>
+         <li class="divider-vertical"></li>
+         <span class="span1"></span>
+         <% if current_user %>
+           <li class="divider-vertical"></li>
+           <a class="brand" href="/logout" method="delete" id="login">Log-out</a>
+         <% else %>
+           <li class="divider-vertical"></li>
+           <a class="brand" href="/users/new" id="login">Log-in</a>
+           <li class="divider-vertical"></li>
+           <a class="brand" href="/sessions/new" id="signup">Signup</a>
+         <% end %>
+       </ul>
+     </nav>
+   </nav>
+ </nav> -->
 
 <%= yield %>
 
-
 </body>
 </html>
+
+
+
+
+
