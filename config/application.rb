@@ -60,7 +60,7 @@ module Bling
     config.assets.version = '1.0'
 
     # Added to fix heroku push (?)
-    config.assets.compile = true
+    config.assets.compile = false
     config.assets.initialize_on_precompile = false
   end
 end

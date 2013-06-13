@@ -1,0 +1,30 @@
+Searching 171 files for "precompile"
+
+/Users/amadden80/Dropbox/wdi/projects/Bling/config/application.rb:
+    4  
+    5  if defined?(Bundler)
+    6:   # If you precompile assets before deploying to production, use this line
+    7    Bundler.require(*Rails.groups(:assets => %w(development test)))
+    8    # If you want your assets lazily compiled in production, use this line
+    .
+   62      # Added to fix heroku push (?)
+   63      config.assets.compile = false
+   64:     config.assets.initialize_on_precompile = false
+   65    end
+   66  end
+
+/Users/amadden80/Dropbox/wdi/projects/Bling/config/environments/production.rb:
+   15    config.assets.compress = true
+   16  
+   17:   # Don't fallback to assets pipeline if a precompiled asset is missed
+   18    config.assets.compile = false
+   19  
+   ..
+   46    # config.action_controller.asset_host = "http://assets.example.com"
+   47  
+   48:   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
+   49:   # config.assets.precompile += %w( search.js )
+   50  
+   51    # Disable delivery errors, bad email addresses will be ignored
+
+5 matches across 2 files
