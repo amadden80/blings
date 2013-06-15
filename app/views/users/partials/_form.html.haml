@@ -1,9 +1,14 @@
 = render partial: 'shared/errors', locals:{object:@user}
-= form_for(@user) do |f|
-  = f.label :username
-  = f.text_field :username
-  = f.label :email
-  = f.email_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.submit
+#signup.container.row
+  #signup.ut.span7.offset3
+    %p
+      Signup and have more options.
+  .span4.offset2
+    = form_for @user do |f|
+      = f.label :username
+      = f.text_field :username
+      = f.label :email
+      = f.text_field :email
+      = f.label :password
+      = f.password_field :password
+      = f.submit

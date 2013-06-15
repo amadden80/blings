@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- <nav class="navbar" >
+<nav class="navbar" >
    <nav class="navbar-inner">
      <nav class="container">
        <ul class="nav">
@@ -17,17 +17,17 @@
          <span class="span1"></span>
          <% if current_user %>
            <li class="divider-vertical"></li>
-           <a class="brand" href="/logout" method="delete" id="login">Log-out</a>
+           <%= link_to('Log-Out', '/logout', {:method=>:delete, :class=>"brand", :id=>"logout"} ) %>
          <% else %>
            <li class="divider-vertical"></li>
-           <a class="brand" href="/users/new" id="login">Log-in</a>
+            <%= link_to('New User', new_user_path, {:class=>"brand", :id=>"login"}) %>
            <li class="divider-vertical"></li>
-           <a class="brand" href="/sessions/new" id="signup">Signup</a>
+           <%= link_to('Log-In', sessions_new_path, {:class=>"brand", :id=>"login"}) %>
          <% end %>
        </ul>
      </nav>
    </nav>
- </nav> -->
+ </nav>
 
 <%= yield %>
 

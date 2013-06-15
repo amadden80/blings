@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def new
     if session[:user_id]
-      redirect_to portfolios_path
+      redirect_to user_path(session[:user_id])
     end
   end
 
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       if authenticated_user
         session[:user_id] = authenticated_user.id
         puts session
-        redirect_to portfolios_path
+        redirect_to user_path(session[:user_id])
       else
         redirect_to sessions_new_path
       end

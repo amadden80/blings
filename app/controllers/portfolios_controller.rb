@@ -12,25 +12,11 @@ class PortfoliosController < ApplicationController
     end
   end
 
-
   public
 
   include ApplicationHelper
 
   def index
-
-    @portfolios = @user.portfolios
-    
-    @portfolioPackage = []
-    
-    @portfolios.each do |portfolio|
-      stockPackage = []
-      portfolio.stocks.each do |stock|
-        path = getDetaulStockAudioPath(stock.ticker)    
-        stockPackage << {ticker: stock.ticker, path: path}
-      end
-       @portfolioPackage << stockPackage
-    end
   end
 
   def new
@@ -41,19 +27,22 @@ class PortfoliosController < ApplicationController
     portfolio = Portfolio.new(params[:portfolio])
     stock = Stock.new(ticker: params[:portfolio][:name])
 
-    if stock.save && portfolio.save
+    open, close, companyName = nil
+    open, close, companyName = getStockPrices(params[:portfolio][:name])
+    puts  getStockPrices(params[:portfolio][:name])
+    if open && close && open>0.0 && close>0.0 && companyName && stock.save && portfolio.save
       portfolio.stocks << stock
       @user.portfolios << portfolio
-      redirect_to portfolios_path
+      redirect_to user_path(@user)
     else
-      redirect_to portfolios_new_path
+      redirect_to user_path(@user)
     end
     
   end
 
   def destroy
-    session[:user_id] = nil
-    redirect_to sessions_new_path
+    Portfolio.find(params[:id]).destroy
+    redirect_to user_path(@user)
   end
 
 end

@@ -39,3 +39,6 @@ portfolio_array[2].stocks << stock_array[2]
 user_array[0].portfolios << portfolio_array[0] << portfolio_array[3]
 user_array[1].portfolios << portfolio_array[1]
 user_array[2].portfolios << portfolio_array[2]
+
+
+User.create(username: 'admin', email: 'admin@blings.com', password: 'password')

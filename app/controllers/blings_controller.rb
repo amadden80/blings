@@ -35,7 +35,7 @@ class BlingsController < ApplicationController
           s.applyFades(100)
           absolutePath = s.writeWave
 
-          manageAudioFiles(100)
+          manageAudioFiles(50, 'non_user_audio')
 
           @path = absolutePath.gsub($absolute_prepath, "/")
         else

@@ -1,0 +1,47 @@
+#upper_mpt_user.container
+  %p
+    Add a stock!
+#lower_mpt
+  %p
+    Enter a stock quote and add it to your portfolio!
+/ / Main page text and search
+#main_search
+  = form_for(@newPortfolio, {class: 'form-search'}) do |f|
+    .input-append
+      = f.text_field :name
+      = f.submit class:'btn'
+      
+
+.container
+  %h1 
+    = @user.username
+
+.container
+  - if @user.portfolios.any?
+    %table
+      %thead
+        %tr
+          %th
+            Company
+          %th
+            Blings
+          %th
+            Delete
+      %tbody
+        - @user.portfolios.each do |portfolio|
+          - if portfolio.stocks
+            - portfolio.stocks.each do |stock|
+              %tr
+                %td
+                  = stock.ticker
+                %td
+                  = link_to '0.25', user_path(:ticker =>  stock.ticker, :seconds => 0.25), {class:"btn", method: :post}
+                  = link_to '0.5', user_path(:ticker =>  stock.ticker, :seconds => 0.5), {class:"btn", method: :post}
+                  = link_to '1.0', user_path(:ticker =>  stock.ticker, :seconds => 1.0), {class:"btn", method: :post}
+                  = link_to '2.0', user_path(:ticker =>  stock.ticker, :seconds => 2.0), {class:"btn", method: :post}
+                %td
+                  = link_to 'Delete', portfolio_path(portfolio), {confirm: "Are you sure you want to delete this user?", class:"btn", method: :delete}
+
+- if @path
+  %span
+    %embed{:height => "0", :src => @path, :width => "0"}

@@ -19,7 +19,18 @@
     font-size: 40px;
     margin-top: 250px;
     margin-left: 32%;
+    word-wrap:normal;
 }
+
+#upper_mpt_user {
+    font-family: Courier;
+    color: #000000;
+    font-size: 40px;
+    margin-top: 45px;
+    margin-left: 32%;
+}
+
+
 
 #lower_mpt {
     font-family: courier;
