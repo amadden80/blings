@@ -10,24 +10,35 @@
 
 <nav class="navbar" >
    <nav class="navbar-inner">
-     <nav class="container">
+     <nav class="nav-collapse collapse">
        <ul class="nav">
-         <a class="brand" href="/" id="nav">Blings</a>
-         <li class="divider-vertical"></li>
-         <span class="span1"></span>
-         <% if current_user %>
-           <li class="divider-vertical"></li>
-           <%= link_to('Log-Out', '/logout', {:method=>:delete, :class=>"brand", :id=>"logout"} ) %>
+        <% if current_user %>
+           <%= link_to('Blings', user_path(current_user), {class:"brand", id:"nav"}) %>
          <% else %>
-           <li class="divider-vertical"></li>
-            <%= link_to('New User', new_user_path, {:class=>"brand", :id=>"login"}) %>
-           <li class="divider-vertical"></li>
-           <%= link_to('Log-In', sessions_new_path, {:class=>"brand", :id=>"login"}) %>
+           <a class="brand" href="/" id="nav">Blings</a>
          <% end %>
        </ul>
+       <div class="nav navbar-text pull-right">
+
+            <% if current_user %>
+              <%= link_to('Log-Out', '/logout', {:method=>:delete, :class=>"", :id=>"logout"} ) %>
+            <% else %>
+              <%= link_to('New-User', new_user_path, {:class=>"", :id=>"login"}) %>
+              <%= link_to('Log-In', sessions_new_path, {:class=>"", :id=>"login"}) %>
+            <% end %>
+
+            <% if current_user && current_user.admin? %>
+              <%= link_to('All-Users', users_path, {:class=>"", :id=>"login"}) %>
+            <% end %>
+
+       </div>
      </nav>
    </nav>
  </nav>
+
+
+
+
 
 <%= yield %>
 

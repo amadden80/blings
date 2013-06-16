@@ -1,9 +1,22 @@
+body {
+    font-family: Courier;
+    color: #000000;
+    width: 100%;
+}
+
+
 #nav {
     font-family: Courier;
     color: #000000;
 }
 
-#login {
+#login, #logout {
+    font-family: Courier;
+    color: #000000;
+}
+
+
+#signup_ut{
     font-family: Courier;
     color: #000000;
 }
@@ -18,7 +31,7 @@
     color: #000000;
     font-size: 40px;
     margin-top: 250px;
-    margin-left: 32%;
+    margin-left: 23%;
     word-wrap:normal;
 }
 
@@ -27,20 +40,20 @@
     color: #000000;
     font-size: 40px;
     margin-top: 45px;
-    margin-left: 32%;
+    margin-left: 19%;
+    word-wrap:normal;
 }
-
 
 
 #lower_mpt {
     font-family: courier;
     color: #F28F16;
     font-size: 20px;
-    margin-left: 37%;
+    margin-left: 36.5%;
 }
 
 #main_search {
-    margin-left: 39%
+    margin-left: 41%
 }
 
 
@@ -52,3 +65,15 @@
 #login_forum_main {
     margin-left: 0px;
 }
+
+
+
+
+#inputUsername, #inputEmail, #inputPassword{
+    font-size: 1.3em;
+}
+
+#signup_ut{
+    font-size: 2em;
+}
+   

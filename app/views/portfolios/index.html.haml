@@ -1,15 +1,16 @@
-%h1
-  This is a portfolio for 
-  = @user.username
-  = link_to 'New Stock', new_portfolio_path
-- @user.portfolios.each do |portfolio|
-  %ul
-    %li
-      - portfolio.stocks.each do |stock|
-        = stock.ticker
+
+/ %h1
+/   This is a portfolio for 
+/   = @user.username
+/   = link_to 'New Stock', new_portfolio_path
+/ - @user.portfolios.each do |portfolio|
+/   %ul
+/     %li
+/       - portfolio.stocks.each do |stock|
+/         = stock.ticker
         
 
-- if @path
-  %span
-    %embed{:height => "0", :src => @path, :width => "0"}
-      %span
+/ - if @path
+/   %span
+/     %embed{:height => "0", :src => @path, :width => "0"}
+/       %span

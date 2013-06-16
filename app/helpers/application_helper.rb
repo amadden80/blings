@@ -168,18 +168,22 @@ end
 
 
   def getStockPrices(ticker)
-    unless ticker.nil?
+    if ticker
       ticker = ticker.chomp.upcase.split(' ').first
 
+      begin
        stockResponse = YahooFinance::get_quotes(YahooFinance::StandardQuote, ticker)[ticker]
-        if stockResponse.nil?
-          return false
-        else
-          quotes = YahooFinance::get_HistoricalQuotes( ticker, Date.today() - 4, Date.today() )
+       quotes = YahooFinance::get_HistoricalQuotes( ticker, Date.today() - 4, Date.today() )
+      rescue
+      end 
+
+        if stockResponse && quotes.any?
           open = quotes.pop.close
           close = stockResponse.lastTrade
           companyName = stockResponse.name
           return open, close, companyName
+        else
+          return false
         end
       else
         return false
@@ -211,6 +215,7 @@ end
 
     return path
   end
+
 
   require 'digest/md5'
   def email_hash(email) 

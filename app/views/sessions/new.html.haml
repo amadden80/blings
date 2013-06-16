@@ -1,8 +1,21 @@
-%h1
-  Log-in
-= form_tag '/sessions' do 
-  = label_tag :email
-  = email_field_tag :email
-  = label_tag :password
-  = password_field_tag :password
-  = submit_tag
+#signup_container{class:'row-fluid'}
+  #signup_ut.span7.offset3
+    %p
+      Log-In
+  %br
+  %br
+  %br
+  %br
+  .span4.offset3
+    = form_tag('/sessions', :html => {class:'form-horizontal', method: :post}) do
+      %div{class:'control-group'}
+        = label_tag('email', nil, {id:'inputEmail'})
+        .controls
+          = email_field_tag(:email)
+      %div{class:'control-group'}
+        = label_tag('password', nil, {id:'inputPassword'})
+        .controls
+          = password_field_tag :password
+      %div{class:'control-group'}
+        .controls
+          = submit_tag 'Submit', class:'btn'

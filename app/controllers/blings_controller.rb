@@ -8,15 +8,16 @@ class BlingsController < ApplicationController
 
   def bling
 
-    if params[:ticker]
+    ticker = params[:ticker]
+    if ticker
       @companyName, close, open = nil
-      open, close, @companyName = getStockPrices(params[:ticker])
+      open, close, @companyName = getStockPrices(ticker)
 
       @path = nil
-      testPath = (Rails.root.to_s + "/public/audio/non_user_audio/tone-#{params[:ticker]}.wav")
+      testPath = (Rails.root.to_s + "/public/audio/non_user_audio/tone-#{ticker}.wav")
       Dir[Rails.root.to_s + "/public/audio/non_user_audio/*"].each do |filename|
         if filename == testPath
-          @path = "/audio/non_user_audio/tone-#{params[:ticker]}.wav"
+          @path = "/audio/non_user_audio/tone-#{ticker}.wav"
         end
       end
 
@@ -26,10 +27,10 @@ class BlingsController < ApplicationController
           puts open
           maxNum = [open, close].max
 
-          open = ((open/maxNum)**3)*440 + 100
-          close = ((close/maxNum)**3)*440 + 100
+          open = ((open/maxNum)**4)*440 + 100
+          close = ((close/maxNum)**4)*440 + 100
 
-          s = Synth.new({path: $absolute_path_non_user_audio, filename: "tone-#{params[:ticker]}",  seconds:0.75})
+          s = Synth.new({path: $absolute_path_non_user_audio, filename: "tone-#{ticker}",  seconds:1})
           s.makeSlide3rd(open.to_f, close.to_f)
           s.normalize
           s.applyFades(100)

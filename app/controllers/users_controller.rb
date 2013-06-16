@@ -12,8 +12,8 @@ class UsersController < ApplicationController
   end
 
   def new
-    if session[:user_id]
-      redirect_to portfolios_path
+    if current_user
+      redirect_to user_path(current_user)
     end
     @user = User.new
   end
@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      @user.email = @user.email.downcase
       redirect_to sessions_new_path
     else
       render :new
@@ -29,9 +30,11 @@ class UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
+    user.clear_portfolios
     user.destroy
     redirect_to :back
   end
+
 
   def show
     puts params
@@ -44,31 +47,33 @@ class UsersController < ApplicationController
       if params[:ticker] && params[:seconds]
 
         params[:seconds] = params[:seconds].to_f
-        if params[:seconds] > 2
-          params[:seconds] = 2
+        if params[:seconds] > 5
+          params[:seconds] = 5
         elsif params[:seconds] <= 0
-          params[:seconds] = 0.25
+          params[:seconds] = 0.05
         end
-
-        @companyName, close, open = nil
-        open, close, @companyName = getStockPrices(params[:ticker])
 
         @path = nil
         emailHash = email_hash(@user.email)
         ticker = params[:ticker]
-        testPath = (Rails.root.to_s + "/public/audio/user_audio/#{emailHash}-#{params[:seconds].to_s}-#{params[:ticker]}.wav")
-        Dir[Rails.root.to_s + "/public/audio/user_audio/*"].each do |filename|
-          if filename == testPath
-            @path = "/audio/user_audio/#{emailHash}-#{params[:seconds].to_s}-#{params[:ticker]}.wav"
+        if ticker
+          testPath = (Rails.root.to_s + "/public/audio/user_audio/#{emailHash}-#{params[:seconds].to_s}-#{ticker}.wav")
+          Dir[Rails.root.to_s + "/public/audio/user_audio/*"].each do |filename|
+            if filename == testPath
+              @path = "/audio/user_audio/#{emailHash}-#{params[:seconds].to_s}-#{ticker}.wav"
+            end
           end
         end
 
         if @path.nil?
+          @companyName, close, open = nil
+          open, close, @companyName = getStockPrices(ticker)
+
           if close && open && @companyName && close > 0 && open > 0
             maxNum = [open, close].max
             open = ((open/maxNum)**4)*440 + 100
             close = ((close/maxNum)**4)*440 + 100
-            s = Synth.new({path: $absolute_path_user_audio, filename: "#{emailHash}-#{params[:seconds].to_s}-#{params[:ticker]}",  seconds:params[:seconds]})
+            s = Synth.new({path: $absolute_path_user_audio, filename: "#{emailHash}-#{params[:seconds].to_s}-#{ticker}",  seconds:params[:seconds]})
             s.makeSlide3rd(open.to_f, close.to_f)
             s.normalize
             s.applyFades(100)
@@ -81,9 +86,8 @@ class UsersController < ApplicationController
         end
       end
     end
+
   end
-
-
 
 
   private
@@ -93,6 +97,7 @@ class UsersController < ApplicationController
       render text: 'not allowed'
     end
   end
+
 
 
 end

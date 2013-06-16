@@ -1,7 +1,38 @@
-%h1
-  Users
-- @users.each do |user|
-  = user.name
-  = user.email
-  = link_to('delete', user_path(user), method: :delete, confirm: 'Are you sure?') unless user==current_user
-  %br
+
+.container
+  %h1
+    Users
+.container
+  %table{class:'table table-hover table-striped'}
+    %thead
+      %tr
+        %th
+          ID
+        %th
+          Username
+        %th
+          Email
+        %th
+          Admin
+        %th
+          Portfolios
+        %th
+          Delete
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            = user.id
+          %td
+            = user.username
+          %td
+            = user.email
+          %td
+            = user.admin?
+          %td
+            -if user.portfolios
+              = user.portfolios.count
+            -else
+              0
+          %td
+            = link_to('delete', user_path(user), {method: :delete, confirm: 'Are you sure?', class:"btn btn-danger"}) unless user==current_user 
