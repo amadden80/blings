@@ -12,25 +12,12 @@ class PortfoliosController < ApplicationController
     end
   end
 
-
   public
 
   include ApplicationHelper
 
   def index
-
-    @portfolios = @user.portfolios
-    
-    @portfolioPackage = []
-    
-    @portfolios.each do |portfolio|
-      stockPackage = []
-      portfolio.stocks.each do |stock|
-        path = getDetaulStockAudioPath(stock.ticker)    
-        stockPackage << {ticker: stock.ticker, path: path}
-      end
-       @portfolioPackage << stockPackage
-    end
+    redirect_to root_path
   end
 
   def new
@@ -38,22 +25,53 @@ class PortfoliosController < ApplicationController
   end
 
   def create
-    portfolio = Portfolio.new(params[:portfolio])
-    stock = Stock.new(ticker: params[:portfolio][:name])
-
-    if stock.save && portfolio.save
-      portfolio.stocks << stock
-      @user.portfolios << portfolio
-      redirect_to portfolios_path
-    else
-      redirect_to portfolios_new_path
-    end
     
+    ticker = params[:portfolio][:name].chomp.upcase.split(' ').first
+    
+    unless current_user.portfolios.find_by_name(ticker)
+    
+      @portfolio = Portfolio.new(name: ticker)
+
+      stock = Stock.find_by_ticker(ticker)
+  
+      if stock
+        @portfolio.stocks << stock
+        @user.portfolios << @portfolio
+        redirect_to user_path(@user)
+      else
+        open, close, companyName = nil
+        open, close, companyName = getStockPrices(ticker)
+        
+        if !open && !close
+          redirect_to user_path(@user)
+        else
+
+          stock = Stock.new(ticker: ticker)
+
+          if open && close && open>0.0 && close>0.0 && companyName && @portfolio.save && stock.save
+            stock.name = companyName
+            stock.save
+            # binding.pry
+            @portfolio.stocks << stock
+            @user.portfolios << @portfolio
+            redirect_to user_path(@user)
+          else
+            render :new
+          end
+        end
+      end
+    else #unless
+      redirect_to user_path(@user)
+    end
+
+
   end
+    
+  
 
   def destroy
-    session[:user_id] = nil
-    redirect_to sessions_new_path
+    Portfolio.find(params[:id]).destroy
+    redirect_to user_path(@user)
   end
 
 end

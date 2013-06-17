@@ -1,4 +1,9 @@
-= form_for(@portfolio) do |f|
-  = f.label "Stock Ticker"
-  = f.text_field :name
-  = f.submit
+#main_search
+  = form_for @portfolio, :html => { class:"form-search"} do |f|
+    .input-append
+      = f.label "Stock Ticker"
+      = f.text_field :name, {class:'span3 search-query'}
+      = f.submit 'Submit', {class:'btn', name:'commit'}
+
+.container
+  = render partial: 'shared/errors', locals:{object:@portfolio}

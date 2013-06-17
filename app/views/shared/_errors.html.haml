@@ -1,7 +1,8 @@
-- if object.errors.any?
-  %h6
-    There are errors on this form
-  %ul
-    - object.errors.full_messages.each do |msg|
-      %li
-        = msg
+.container
+  - if object.errors.any?
+    %h6
+      Error!
+    %ul
+      - object.errors.full_messages.each do |msg|
+        %li
+          = msg

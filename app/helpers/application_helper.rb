@@ -140,47 +140,50 @@ module ApplicationHelper
   end
 
 
-  def deleteOldFile(filename, keepSeconds)
-      
-      puts "Filename: #{filename}"
-      puts "Now: #{Time.now}"
-      
-      if (Time.now - File.stat(filename).ctime) > keepSeconds
-        File.delete(filename)
-        puts "*/*/*/* Delete: #{filename} */*/*/*"
-      end
-  end
+def deleteOldFile(filename, keepSeconds)
+
+    if (Time.now - File.stat(filename).ctime) > keepSeconds
+      FileUtils.rm_rf(filename, secure: true)
+      puts "*/*/*/* Delete: #{filename} */*/*/*"
+    end
+
+end
 
 
   # You will need to manage this for other than non_user_content
-  def manageAudioFiles(maxNumFiles)
+  def manageAudioFiles(maxNumFiles, folder)
 
-    fileNumber = Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].count
+    fileNumber = Dir[(Rails.root.to_s + "/public/audio/#{folder}/*")].count
     keepSeconds = 7200
 
     while fileNumber > maxNumFiles
       keepSeconds *= 0.5
-      Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].each do |filename| 
+      Dir[(Rails.root.to_s + "/public/audio/#{folder}/*")].each do |filename| 
       deleteOldFile(filename, keepSeconds)
       end
-      fileNumber = Dir[(Rails.root.to_s + "/public/audio/non_user_audio/*")].count
+      fileNumber = Dir[(Rails.root.to_s + "/public/audio/#{folder}/*")].count
     end
 
   end
 
 
-
   def getStockPrices(ticker)
-    unless ticker.nil?
+    if ticker
       ticker = ticker.chomp.upcase.split(' ').first
-      stockResponse = YahooFinance::get_quotes(YahooFinance::StandardQuote, ticker)[ticker]
-        if stockResponse.nil?
-          return false
-        else
-          close = stockResponse.previousClose
-          open = stockResponse.lastTrade
+
+      begin
+       stockResponse = YahooFinance::get_quotes(YahooFinance::StandardQuote, ticker)[ticker]
+       quotes = YahooFinance::get_HistoricalQuotes( ticker, Date.today() - 4, Date.today() )
+      rescue
+      end 
+
+        if stockResponse && quotes.any?
+          open = quotes.pop.close
+          close = stockResponse.lastTrade
           companyName = stockResponse.name
           return open, close, companyName
+        else
+          return false
         end
       else
         return false
@@ -213,6 +216,11 @@ module ApplicationHelper
     return path
   end
 
+
+  require 'digest/md5'
+  def email_hash(email) 
+    return Digest::MD5.hexdigest(email.downcase)
+  end
 
 end
 

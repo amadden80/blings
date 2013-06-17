@@ -1,9 +1,31 @@
+%br
+%br
+%br
+%br
+%br
+%br
+#signup_container{class:'row-fluid'}
+  #signup_ut.span7.offset3
+    %p
+      Signup and get customizations!
+  %br
+  %br
+  %br  
+  .span4.offset3
+    = form_for(@user, :html => {class:'form-horizontal'}) do |f|
+      %div{class:'control-group'}
+        = f.label(:username, {id:'inputUsername'})
+        =f.text_field(:username)
+      %div{class:'control-group'}
+        = f.label(:email, {id:'inputEmail'})
+        = f.text_field :email
+      %div{class:'control-group'}
+        = f.label(:password, {id:'inputPassword'})
+        = f.password_field :password
+      %div{class:'control-group'}
+        = f.submit 'Submit', class:'btn'
+%br
+
+
 = render partial: 'shared/errors', locals:{object:@user}
-= form_for(@user) do |f|
-  = f.label :username
-  = f.text_field :username
-  = f.label :email
-  = f.email_field :email
-  = f.label :password
-  = f.password_field :password
-  = f.submit
+          
