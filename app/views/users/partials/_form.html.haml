@@ -1,11 +1,16 @@
+%br
+%br
+%br
+%br
+%br
+%br
 #signup_container{class:'row-fluid'}
   #signup_ut.span7.offset3
     %p
       Signup and get customizations!
   %br
   %br
-  %br
-  %br
+  %br  
   .span4.offset3
     = form_for(@user, :html => {class:'form-horizontal'}) do |f|
       %div{class:'control-group'}
@@ -18,7 +23,7 @@
         = f.label(:password, {id:'inputPassword'})
         = f.password_field :password
       %div{class:'control-group'}
-        = f.submit 'Start', class:'btn'
+        = f.submit 'Submit', class:'btn'
 %br
 
 

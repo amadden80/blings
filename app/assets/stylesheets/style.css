@@ -31,7 +31,16 @@ body {
     color: #000000;
     font-size: 40px;
     margin-top: 250px;
-    margin-left: 23%;
+    margin-left: 22.5%;
+    word-wrap:normal;
+}
+
+#upper_mpt_bling {
+    font-family: Courier;
+    color: #000000;
+    font-size: 40px;
+    margin-top: 250px;
+    margin-left: 20%;
     word-wrap:normal;
 }
 
@@ -43,13 +52,26 @@ body {
     margin-left: 19%;
     word-wrap:normal;
 }
+#lower_mpt_user {
+    font-family: courier;
+    color: #F28F16;
+    font-size: 20px;
+    margin-left: 40.3%;
+}
+
 
 
 #lower_mpt {
     font-family: courier;
     color: #F28F16;
     font-size: 20px;
-    margin-left: 36.5%;
+    margin-left: 36.2%;
+}
+#lower_mpt_bling {
+    font-family: courier;
+    color: #F28F16;
+    font-size: 20px;
+    margin-left: 36.1%;
 }
 
 #main_search {
@@ -77,3 +99,91 @@ body {
     font-size: 2em;
 }
    
+
+/*
+
+#nav {
+    font-size: 17px;
+    font-family: Courier;
+    color: #000000;
+}
+
+#login, #logout, #signup_ut, #signup, #upper_mpt, #upper_mpt_user, #login_forum, #user_upper_mpt{
+    font-family: Courier;
+    color: #000000;
+}
+
+
+body {
+    font-family: Courier;
+    color: #000000;
+    width: 100%;
+}
+
+#upper_mpt {
+    font-size: 40px;
+    margin-top: 250px;
+    margin-left: 325px;
+    word-wrap:normal;
+}
+
+#upper_mpt_user {
+    font-size: 40px;
+    margin-top: 83px;
+    margin-left: 19%;
+    word-wrap:normal;
+}
+
+#user_upper_mpt {
+    font-size: 40px;
+    margin-top: 250px;
+    margin-left: 245px;                                                      
+    word-wrap:normal;
+}
+
+#lower_mpt {
+    font-family: courier;
+    color: #F28F16;
+    font-size: 20px;
+    margin-left: 36.4%;
+    position: absolute;
+}
+
+#user_lower_mpt {
+    font-family: courier;
+    color: #F28F16;
+    font-size: 20px;
+    margin-left: 39.6%;
+    position: absolute;
+}
+
+#main_search {
+    margin-top: 24px;
+    margin-left: 41%
+}
+
+#user_main_search {
+    margin-left: 622px;
+    margin-top: 24px;
+}
+
+
+#login_forum_main {
+    margin-left: 0px;
+}
+
+
+#inputUsername, #inputEmail, #inputPassword{
+    font-size: 1.3em;
+}
+
+#signup_ut{
+    font-size: 2em;
+}
+
+
+#signup_container {
+    margin-top: 18em;
+}
+
+*/
