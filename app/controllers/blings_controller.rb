@@ -1,4 +1,4 @@
-class BlingsController < ApplicationController
+cdclass BlingsController < ApplicationController
 
   include ApplicationHelper
 

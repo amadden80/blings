@@ -17,7 +17,7 @@ development:
   encoding: unicode
   database: bling_development
   pool: 5
-  username: amadden80
+  username: david
   host: localhost
   password:
 
@@ -44,7 +44,7 @@ test:
   encoding: unicode
   database: bling_development
   pool: 5
-  username: amadden80
+  username: david 
   host: localhost
   password:
 
@@ -53,6 +53,6 @@ production:
   encoding: unicode
   database: bling_development
   pool: 5
-  username: amadden80
+  username: david
   host: localhost
   password:
